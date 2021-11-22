@@ -10,6 +10,9 @@ async function bootstrap() {
   await createConnection({
     type: "postgres",
     url: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    },
     entities: [Users]
   })
   const app = await NestFactory.create(AppModule);
