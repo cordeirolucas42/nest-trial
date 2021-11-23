@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { createConnection } from 'typeorm';
 import { AppModule } from './app.module';
-import {Users} from "./models/users";
+import {Users} from "./users/users.entity";
 import * as dotenv from "dotenv";
 
 dotenv.config()
