@@ -3,6 +3,7 @@ import { createConnection } from 'typeorm';
 import { AppModule } from './app.module';
 import {Users} from "./users/users.entity";
 import * as dotenv from "dotenv";
+import { Position } from './positions/entities/position.entity';
 
 dotenv.config()
 
@@ -13,7 +14,7 @@ async function bootstrap() {
     ssl: {
       rejectUnauthorized: false
     },
-    entities: [Users]
+    entities: [Users, Position]
   })
   const app = await NestFactory.create(AppModule);
   await app.listen(process.env.PORT || 3000);
