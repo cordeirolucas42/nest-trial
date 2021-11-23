@@ -1,9 +1,8 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Users extends BaseEntity {
+export class Users {
     constructor(name: string, last_name: string) {
-        super();
         this.name = name;
         this.last_name = last_name
     }

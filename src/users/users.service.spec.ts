@@ -1,18 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
+import { Users } from './users.entity';
+import {Repository} from "typeorm";
+
 
 describe('UsersService', () => {
-  let service: UsersService;
+  const usersRepository = {} as Repository<Users>
+  let service = new UsersService(usersRepository);
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersService],
-    }).compile();
+  it('service to work', async () => {
+    usersRepository.find = jest.fn().mockResolvedValue([])
+    const users = await service.findAll(5);
 
-    service = module.get<UsersService>(UsersService);
+    expect(users).toStrictEqual([])
+    expect(usersRepository.find).toBeCalledTimes(1);
+    expect(usersRepository.find).toBeCalledWith({ skip: 6 })
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+  it("should catch an error", async () => {
+    usersRepository.find = jest.fn().mockRejectedValue(new Error())
+
+  })
 });
